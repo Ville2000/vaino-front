@@ -1,0 +1,35 @@
+.register-form {
+  display: grid;
+  grid-template-columns: 250px;
+  justify-content: center;
+}
+
+.register-form > form {
+  display: grid;
+  grid-gap: 5px;
+}
+
+.register-form > form > div {
+  display: grid;
+  grid-gap: 2px;
+}
+
+.register-form > form > div > label {
+  padding-left: 1px;
+}
+
+.register-form > form > div > input {
+  border-radius: 4px;
+  height: 24px;
+  font-size: 16px;
+}
+
+.register-form_buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.register-form_buttons > button {
+  font-size: 14px;
+  padding: 6px;
+}

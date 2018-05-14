@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import loginService from './services/login'
 import LoginForm from './components/LoginForm'
+import RegisterForm from './components/RegisterForm'
 
 class App extends Component {
   constructor(props) {
@@ -8,7 +9,9 @@ class App extends Component {
 
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      firstname: '',
+      lastname: ''
     }
   }
 
@@ -22,7 +25,7 @@ class App extends Component {
     e.preventDefault();
     loginService.login({
       username: this.state.username,
-      password: this.state.password
+      password: this.state.password,
     })
   }
 
@@ -33,6 +36,24 @@ class App extends Component {
     })
   }
 
+  handleRegister = (e) => {
+    e.preventDefault();
+    console.log("Registering")
+
+    console.log("Registration info", this.state.firstname, this.state.lastname, this.state.username, this.state.password)
+  }
+
+  handleRegisterCancel = () => {
+    console.log("Register cancel");
+
+    this.setState({
+      username: '',
+      password: '',
+      firstname: '',
+      lastname: ''
+    })
+  }
+
   render() {
     return (
       <div className="container">
@@ -40,12 +61,20 @@ class App extends Component {
         <div className="login-buttons">
           <button>Rekisteröidy</button>
           <button>Kirjaudu</button>
+          <RegisterForm
+            username={this.state.username}
+            firstname={this.state.firstname}
+            lastname={this.state.lastname}
+            password={this.state.password}
+            handleChange={this.handleFormChange}
+            handleRegister={this.handleRegister}
+            handleRegisterCancel={this.handleRegisterCancel} />
           <LoginForm 
             handleChange={this.handleFormChange}
             handleLogin={this.handleLogin}
             handleLoginCancel={this.handleLoginCancel}
             username={this.state.username}
-            password={this.state.password}/>
+            password={this.state.password} />
         </div>
       </div>
     )

@@ -1,0 +1,29 @@
+.login-form {
+  display: grid;
+  grid-template-columns: 250px;
+  justify-content: center;
+}
+
+.login-form > form {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-gap: 8px;
+}
+
+.login-form > form > div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 8px;
+}
+
+.login-form input {
+  border-radius: 4px;
+  height: 24px;
+  font-size: 16px;
+  padding: 0 4px;
+}
+
+.login-form button {
+  font-size: 14px;
+  padding: 6px;
+}

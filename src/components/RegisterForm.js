@@ -46,7 +46,7 @@ const RegisterForm = ({
             type="text" />
         </div>
         <div className="register-form_buttons">
-          <button onClick={handleRegisterCancel}>Peruuta</button>
+          <button type="button" onClick={handleRegisterCancel}>Peruuta</button>
           <button type="submit">Rekisteröidy</button>
         </div>
       </form>

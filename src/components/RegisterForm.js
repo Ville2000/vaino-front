@@ -3,9 +3,8 @@ import './RegisterForm.css'
 
 const RegisterForm = ({
   username,
-  firstname,
-  lastname,
   password,
+  passwordAgain,
   handleChange,
   handleRegister,
   handleRegisterCancel
@@ -22,26 +21,18 @@ const RegisterForm = ({
           type="text" />
         </div>
         <div>
-          <label htmlFor="firstname">Etunimi</label>
-          <input
-            name="firstname"
-            value={firstname}
-            onChange={handleChange}
-            type="text" />
-        </div>
-        <div>
-          <label htmlFor="lastname">Sukunimi</label>
-          <input
-            name="lastname"
-            value={lastname}
-            onChange={handleChange}
-            type="text" />
-        </div>
-        <div>
           <label htmlFor="password">Salasana</label>
           <input
             name="password"
             value={password}
+            onChange={handleChange}
+            type="text" />
+        </div>
+        <div>
+          <label htmlFor="password">Salasana uudelleen</label>
+          <input
+            name="passwordAgain"
+            value={passwordAgain}
             onChange={handleChange}
             type="text" />
         </div>

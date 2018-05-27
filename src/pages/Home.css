@@ -1,15 +1,18 @@
 .home {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 200px 1fr;
+}
+
+.home > h1 {
+  justify-self: center;
 }
 
 .home_buttons {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  justify-items: space-between;
-  width: 350px;
-  grid-gap: 8px;
+  grid-template-columns: 150px 150px;
+  grid-gap: 32px;
+  justify-content: center;
 }
 
 .home_buttons_register, .home_buttons_login {

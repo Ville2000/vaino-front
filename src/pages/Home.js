@@ -3,18 +3,21 @@ import LoginForm from '../components/LoginForm';
 import loginService from '../services/login'
 import RegisterForm from '../components/RegisterForm'
 import './Home.css'
+import Notification from '../components/Notification'
+import registerService from '../services/register'
 
 class Home extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      user: null,
       username: '',
       password: '',
-      firstname: '',
-      lastname: '',
+      passwordAgain: '',
       displayRegisterForm: false,
-      displayLoginForm: false
+      displayLoginForm: false,
+      notification: null
     }
   }
 
@@ -24,34 +27,57 @@ class Home extends Component {
     })
   }
 
-  handleLogin = (e) => {
+  handleLogin = async (e) => {
     e.preventDefault();
-    loginService.login({
-      username: this.state.username,
-      password: this.state.password,
-    })
+
+    try {
+      const user = await loginService.login({
+        username: this.state.username,
+        password: this.state.password,
+      })
+  
+      window.localStorage.setItem('vainoUser', JSON.stringify(user))
+      this.setState({ username: '', password: '', user })
+    } catch(exception) {
+      this.displayNotification({
+        type: 'error',
+        message: exception.response.data.error
+      })
+    }
   }
 
-  handleLoginCancel = () => {
+  handleRegister = async (e) => {
+    e.preventDefault();
+
+    if (!(this.state.password === this.state.passwordAgain)) {
+      this.setState({ username: '', password: '', passwordAgain: '' })
+      this.displayNotification({
+        type: 'error',
+        message: 'Salasanat eivät täsmää'
+      })
+      return
+    }
+
+    try {
+      const user = await registerService.register({
+        username: this.state.username,
+        password: this.state.password
+      })
+
+      console.log('user', user) // Käyttäjänimi tulee tänne oikein
+    } catch(exception) {
+      this.displayNotification({
+        type: 'error',
+        message: exception.response.data.error
+      })
+    }
+  }
+
+  handleFormCancel = () => {
     this.setState({
       username: '',
       password: '',
-      displayLoginForm: false,
-      displayRegisterForm: false
-    })
-  }
-
-  handleRegister = (e) => {
-    e.preventDefault();
-    console.log("Registration info", this.state.firstname, this.state.lastname, this.state.username, this.state.password)
-  }
-
-  handleRegisterCancel = () => {
-    this.setState({
-      username: '',
-      password: '',
-      firstname: '',
-      lastname: '',
+      passwordAgain: '',
       displayLoginForm: false,
       displayRegisterForm: false
     })
@@ -63,10 +89,22 @@ class Home extends Component {
     })
   }
 
+  displayNotification = (notification) => {
+    this.setState({ notification })
+
+    console.log(this.state.notification)
+
+    setTimeout(() => {
+      this.setState({ notification: null })
+    }, 5000)
+  }
+
   render() {
     return(
       <div className="home">
         <h1>Väinö</h1>
+        { this.state.notification ?
+          <Notification notification={this.state.notification} /> : null }
         { (this.state.displayLoginForm || this.state.displayRegisterForm) ? null :
           <div className="home_buttons">
             <button className="home_buttons_register" name="displayRegisterForm" onClick={this.toggleDisplay}>Rekisteröidy</button>
@@ -76,18 +114,17 @@ class Home extends Component {
           <LoginForm
             handleChange={this.handleFormChange}
             handleLogin={this.handleLogin}
-            handleLoginCancel={this.handleLoginCancel}
+            handleLoginCancel={this.handleFormCancel}
             username={this.state.username}
             password={this.state.password} /> : null }
         { this.state.displayRegisterForm ?
           <RegisterForm
             username={this.state.username}
-            firstname={this.state.firstname}
-            lastname={this.state.lastname}
             password={this.state.password}
+            passwordAgain={this.state.passwordAgain}
             handleChange={this.handleFormChange}
             handleRegister={this.handleRegister}
-            handleRegisterCancel={this.handleRegisterCancel} /> : null }
+            handleRegisterCancel={this.handleFormCancel} /> : null }
       </div>
     )
   }

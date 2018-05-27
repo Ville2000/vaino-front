@@ -1,0 +1,40 @@
+.not-found {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1.5fr 1fr 1fr;
+  justify-items: center;
+}
+
+.not-found_content {
+  display: grid;
+  justify-items: center;
+  margin-bottom: 0px;
+}
+
+.not-found_header {
+  align-self: end;
+}
+
+.not-found_content p:nth-child(1) {
+  margin-bottom: 4px;
+}
+
+.not-found_content p:nth-child(2) {
+  margin-top: 4px;
+}
+
+.not-found button {
+  border: none;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 12px 24px;
+  color: white;
+  transition: all 0.5s;
+  margin-top: 16px;
+  background-color: var(--blue);
+  align-self: start;
+}
+
+.not-found button:hover {
+  background-color: rgba(15, 64, 131, 0.8);
+}

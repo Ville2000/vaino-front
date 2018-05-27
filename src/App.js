@@ -1,23 +1,25 @@
 import React, { Component } from 'react'
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 import Home from './pages/Home'
 import NotFound from './components/NotFound'
 import Profile from './pages/Profile';
 import NewGame from './pages/NewGame';
 
-// TODO Nämä eivät toimi, jos backend jakaa ohjelman staattisena
-// Tulee vaihtaa React-routeriin
-const PAGES = {
-  "/": Home,
-  "/profile": Profile,
-  "/newGame": NewGame
-};
-
 class App extends Component {
   render() {
-    const PathHandler = PAGES[this.props.pathname] || NotFound;
-
     return (
-      <PathHandler />
+      <div>
+        <Router>
+          <div>
+            <Switch>
+              <Route exact path="/" render={ () => <Home /> } />
+              <Route path="/profile" render={ () => <Profile /> } />
+              <Route path="/newGame" render={ () => <NewGame /> } />
+              <Route render={ () => <NotFound /> } />
+            </Switch>
+          </div>
+        </Router>
+      </div>
     )
   }
 }

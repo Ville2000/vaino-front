@@ -1,11 +1,17 @@
 import React, {Component} from 'react';
 
 class Profile extends Component {
+  constructor(props) {
+    super(props)
+  }
+
   render() {
     return (
       <div>
         <div>
           <h1>Navbar</h1>
+          <p>{ this.props.user.username }</p>
+          <button onClick={this.props.logout}>Kirjaudu ulos</button>
         </div>
         <div>
           <h1>Profiili</h1>

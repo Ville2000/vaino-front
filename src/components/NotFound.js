@@ -1,5 +1,6 @@
 import React from 'react'
 import './NotFound.css'
+import history from '../services/history'
 
 const NotFound = () => {
   return (
@@ -9,7 +10,7 @@ const NotFound = () => {
         <p>Taisit eksyä...</p>
         <p>Tästä pääset kuitenkin takaisin!</p>
       </div>
-      <button onClick={() => window.location.pathname = "/"}>Etusivulle</button>
+      <button onClick={() => history.push('/')}>Etusivulle</button>
     </div>
   )
 }

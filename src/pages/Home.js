@@ -38,6 +38,7 @@ class Home extends Component {
   
       window.localStorage.setItem('vainoUser', JSON.stringify(user))
       this.setState({ username: '', password: '', user })
+      this.props.setUser(user)
     } catch(exception) {
       this.displayNotification({
         type: 'error',
@@ -64,7 +65,9 @@ class Home extends Component {
         password: this.state.password
       })
 
-      console.log('user', user) // Käyttäjänimi tulee tänne oikein
+      window.localStorage.setItem('vainoUser', JSON.stringify(user))
+      this.setState({ username: '', password: '', passwordAgain: '', user })
+      this.props.setUser(user)
     } catch(exception) {
       this.displayNotification({
         type: 'error',
@@ -84,6 +87,16 @@ class Home extends Component {
   }
 
   toggleDisplay = (e) => {
+    if (e.target.name === 'displayLoginForm') {
+      const user = window.localStorage.getItem('vainoUser')
+
+      if (user) {
+        this.setState({ user })
+        this.props.setUser(user)
+        return
+      }
+    }
+
     this.setState({
       [e.target.name]: true
     })

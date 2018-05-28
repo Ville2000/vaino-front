@@ -5,6 +5,8 @@ import RegisterForm from '../components/RegisterForm'
 import './Home.css'
 import Notification from '../components/Notification'
 import registerService from '../services/register'
+import history from '../services/history'
+import { Link } from 'react-router-dom'
 
 class Home extends Component {
   constructor(props) {
@@ -115,6 +117,7 @@ class Home extends Component {
   render() {
     return(
       <div className="home">
+      <Link to="/about">What the...?</Link>
         <h1>Väinö</h1>
         { this.state.notification ?
           <Notification notification={this.state.notification} /> : null }
@@ -138,6 +141,9 @@ class Home extends Component {
             handleChange={this.handleFormChange}
             handleRegister={this.handleRegister}
             handleRegisterCancel={this.handleFormCancel} /> : null }
+        <div>
+          (C) Ville Haapavaara ville.haapavaara@gmail.com
+        </div>
       </div>
     )
   }

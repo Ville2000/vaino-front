@@ -5,6 +5,7 @@ import NotFound from './components/NotFound'
 import Profile from './pages/Profile';
 import NewGame from './pages/NewGame';
 import history from './services/history'
+import About from './pages/About'
 
 class App extends Component {
   constructor() {
@@ -43,6 +44,7 @@ class App extends Component {
               <NewGame /> :
               <Redirect to="/" />
               } />
+            <Route path="/about" render={ () => <About /> } />
             <Route render={ () => <NotFound /> } />
           </Switch>
         </Router>

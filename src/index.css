@@ -3,13 +3,17 @@
   --blue: #0F4083;
 }
 
+#root {
+  height: 100%;
+}
+
 html {
   height: 100%;
 }
 
 body {
   margin: 0;
-  padding: 8px;
+  padding: 0 8px;
   font-family: sans-serif;
   background: linear-gradient(to bottom right, var(--blue), var(--red));
   height: 100%;

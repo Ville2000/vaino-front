@@ -2,6 +2,7 @@
   display: grid;
   grid-template-columns: 250px;
   justify-content: center;
+  margin: auto;
 }
 
 .register-form > form {

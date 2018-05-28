@@ -25,8 +25,12 @@ class App extends Component {
   }
 
   render() {
+    const style = {
+      height: '100%'
+    }
+
     return (
-      <div>
+      <div style={style}>
         <Router history={history}>
           <Switch>
             <Route exact path="/" render={ () =>

@@ -115,9 +115,16 @@ class Home extends Component {
   }
 
   render() {
+    const linkStyle = {
+      'justify-self': 'end',
+      'align-self': 'center',
+      'color': 'white',
+      'font-size': '12px'
+    }
+
     return(
       <div className="home">
-      <Link to="/about">What the...?</Link>
+        <Link style={linkStyle} to="/about">What the...?</Link>
         <h1>Väinö</h1>
         { this.state.notification ?
           <Notification notification={this.state.notification} /> : null }
@@ -141,8 +148,8 @@ class Home extends Component {
             handleChange={this.handleFormChange}
             handleRegister={this.handleRegister}
             handleRegisterCancel={this.handleFormCancel} /> : null }
-        <div>
-          (C) Ville Haapavaara ville.haapavaara@gmail.com
+        <div className="home_footer">
+          <p>(C) 2018 Ville Haapavaara ville.haapavaara@gmail.com</p>
         </div>
       </div>
     )

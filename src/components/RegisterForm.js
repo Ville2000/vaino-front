@@ -37,8 +37,8 @@ const RegisterForm = ({
             type="text" />
         </div>
         <div className="register-form_buttons">
-          <button type="button" onClick={handleRegisterCancel}>Peruuta</button>
-          <button type="submit">Rekisteröidy</button>
+          <button className="btn btn--warning" type="button" onClick={handleRegisterCancel}>Peruuta</button>
+          <button className="btn btn--success" type="submit">Rekisteröidy</button>
         </div>
       </form>
     </div>

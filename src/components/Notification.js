@@ -1,9 +1,9 @@
 import React from 'react'
+import './Notification.css'
 
 const Notification = ({ notification }) => {
   return (
-    <div>
-      <p>{ notification.type }</p>
+    <div className={`notification notification--${notification.type}`}>
       <p>{ notification.message }</p>
     </div>
   )

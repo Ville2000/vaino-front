@@ -1,6 +1,8 @@
 :root {
   --red: #FF0000;
   --blue: #0F4083;
+  --green: rgba(0, 117, 59, 1);
+  --orange: rgba(253, 97, 0, 1);
 }
 
 #root {
@@ -19,4 +21,20 @@ body {
   height: 100%;
   color: white;
   min-height: 100%;
+}
+
+.btn {
+  font-size: 14px;
+  padding: 10px;
+  color: white;
+  border: none;
+  font-weight: bold;
+}
+
+.btn--success {
+  background-color: var(--green);
+}
+
+.btn--warning {
+  background-color: var(--orange);
 }

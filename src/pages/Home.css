@@ -1,7 +1,7 @@
 .home {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 50px 200px 1fr 50px;
+  grid-template-rows: 50px 100px 50px 1fr 50px;
   height: 100%;
 }
 
@@ -11,9 +11,26 @@
   font-size: 12px;
 }
 
-.home > h1 {
+.home__title {
+  display: grid;
+  justify-content: center;
+  justify-items: center;
+}
+
+.home__title > h1, .home__title > p {
+  margin: 0;
+  padding: 0;
+}
+
+.home__title > h1 {
+  align-self: end;
+}
+
+.home__title > p {
+  font-family: 'Times New Roman', Times, serif;
   align-self: center;
-  justify-self: center;
+  font-size: 14px;
+  font-style: italic;
 }
 
 .home_buttons {
@@ -21,6 +38,7 @@
   grid-template-columns: 150px 150px;
   grid-gap: 32px;
   justify-content: center;
+  
 }
 
 .home_buttons_register, .home_buttons_login {

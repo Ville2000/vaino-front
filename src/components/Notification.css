@@ -1,0 +1,20 @@
+.notification {
+  display: grid;
+  width: 100%;
+  justify-self: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.notification > p {
+  color: white;
+  padding: 0 8px;
+}
+
+.notification--error {
+  background-color: crimson;
+}
+
+.notificatoin--warning {
+  background-color: rgb(243, 218, 75)
+}

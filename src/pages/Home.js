@@ -84,7 +84,8 @@ class Home extends Component {
       password: '',
       passwordAgain: '',
       displayLoginForm: false,
-      displayRegisterForm: false
+      displayRegisterForm: false,
+      notification: null
     })
   }
 
@@ -116,19 +117,25 @@ class Home extends Component {
 
   render() {
     const linkStyle = {
-      'justify-self': 'end',
-      'align-self': 'center',
+      'justifySelf': 'end',
+      'alignSelf': 'center',
       'color': 'white',
-      'font-size': '12px'
+      'fontSize': '12px'
     }
 
     return(
       <div className="home">
         <Link style={linkStyle} to="/about">What the...?</Link>
-        <h1>Väinö</h1>
-        { this.state.notification ?
-          <Notification notification={this.state.notification} /> : null }
-        { (this.state.displayLoginForm || this.state.displayRegisterForm) ? null :
+        {/* <hi>Väinö</hi> */}
+        <div className="home__title">
+          <h1>VÄINÖ</h1>
+          <p>The Ultimate Card Game</p>
+        </div>
+        { this.state.notification ? 
+          <Notification notification={this.state.notification} /> :
+          <div></div> }
+        { this.state.displayLoginForm || this.state.displayRegisterForm ?
+          null :
           <div className="home_buttons">
             <button className="home_buttons_register" name="displayRegisterForm" onClick={this.toggleDisplay}>Rekisteröidy</button>
             <button className="home_buttons_login" name="displayLoginForm" onClick={this.toggleDisplay}>Kirjaudu</button>
@@ -149,7 +156,7 @@ class Home extends Component {
             handleRegister={this.handleRegister}
             handleRegisterCancel={this.handleFormCancel} /> : null }
         <div className="home_footer">
-          <p>(C) 2018 Ville Haapavaara ville.haapavaara@gmail.com</p>
+          <p>(C) 2018 Ville Haapavaara</p>
         </div>
       </div>
     )

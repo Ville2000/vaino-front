@@ -11,7 +11,8 @@ const LoginForm = ({handleLogin, handleLoginCancel, handleChange, username, pass
             name="username"
             value={username}
             onChange={handleChange}
-            type="text" />
+            type="text"
+            autoComplete="off" />
           </div>
           <div className="login-form__field">
             <label htmlFor="password">Salasana</label>
@@ -19,7 +20,7 @@ const LoginForm = ({handleLogin, handleLoginCancel, handleChange, username, pass
               name="password"
               value={password}
               onChange={handleChange}
-              type="text" />
+              type="password" />
           </div>
         <div className="login-form__buttons">
           <button className="btn btn--warning" type="button" onClick={handleLoginCancel}>Peruuta</button>

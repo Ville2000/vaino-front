@@ -18,7 +18,8 @@ const RegisterForm = ({
           name="username"
           value={username}
           onChange={handleChange}
-          type="text" />
+          type="text"
+          autoComplete="off" />
         </div>
         <div>
           <label htmlFor="password">Salasana</label>
@@ -26,7 +27,7 @@ const RegisterForm = ({
             name="password"
             value={password}
             onChange={handleChange}
-            type="text" />
+            type="password" />
         </div>
         <div>
           <label htmlFor="password">Salasana uudelleen</label>
@@ -34,7 +35,7 @@ const RegisterForm = ({
             name="passwordAgain"
             value={passwordAgain}
             onChange={handleChange}
-            type="text" />
+            type="password" />
         </div>
         <div className="register-form_buttons">
           <button className="btn btn--warning" type="button" onClick={handleRegisterCancel}>Peruuta</button>

@@ -1,0 +1,58 @@
+.profile {
+  display: grid;
+  grid-template-rows: 50px 1fr;
+  height: calc(100% - 8px);
+  padding-bottom: 8px;
+}
+
+.profile__header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.profile__header > h1 {
+  margin: 0;
+  font-size: 22px;
+  justify-self: start;
+  align-self: center;
+}
+
+.profile__header > button {
+  margin: 0;
+  justify-self: end;
+  align-self: center;
+  font-size: 12px;
+}
+
+.profile__content {
+  display: grid;
+  grid-template-rows: 4fr 1fr;
+  grid-gap: 8px;
+}
+
+.profile__content__previous-games {
+  color: black;
+  background-color: white;
+  background-size: 25px 25px;
+  background-image: linear-gradient(to right, lightgrey 1px, transparent 1px), linear-gradient(to bottom, lightgrey 1px, transparent 1px);
+  background-position-x: -8px;
+  background-position-y: -8px;
+  border-radius: 2em 1em 4em / 0.5em 3em;
+  margin: 0;
+  padding: 16px 8px;
+}
+
+.profile__content__previous-games > h1 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.profile__content__buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 8px;
+}
+
+.profile__content__buttons > button {
+  font-size: 18px;
+}

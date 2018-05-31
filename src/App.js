@@ -6,12 +6,13 @@ import Profile from './pages/Profile';
 import NewGame from './pages/NewGame';
 import history from './services/history'
 import About from './pages/About'
+import Friends from './pages/Friends'
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
-      user: window.localStorage.getItem('vainoUser')
+      user: JSON.parse(window.localStorage.getItem('vainoUser'))
     }
   }
 
@@ -46,6 +47,10 @@ class App extends Component {
               } />
             <Route path="/newGame" render={ () => this.state.user ?
               <NewGame /> :
+              <Redirect to="/" />
+              } />
+            <Route path="/friends" render={ () => this.state.user ?
+              <Friends /> :
               <Redirect to="/" />
               } />
             <Route path="/about" render={ () => <About /> } />

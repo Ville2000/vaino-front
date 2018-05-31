@@ -5,7 +5,6 @@ import RegisterForm from '../components/RegisterForm'
 import './Home.css'
 import Notification from '../components/Notification'
 import registerService from '../services/register'
-import history from '../services/history'
 import { Link } from 'react-router-dom'
 
 class Home extends Component {

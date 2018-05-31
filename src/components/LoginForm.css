@@ -21,7 +21,7 @@
 }
 
 .login-form__field input {
-  border-radius: 1px;
+  border-radius: 2px;
   height: 24px;
   font-size: 16px;
   padding: 2px 4px;

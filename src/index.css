@@ -38,3 +38,15 @@ body {
 .btn--warning {
   background-color: var(--orange);
 }
+
+.btn--danger {
+  background-color: var(--red);
+}
+
+.btn--blue {
+  background-color: var(--blue);
+}
+
+.btn--red {
+  background-color: var(--red);
+}

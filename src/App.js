@@ -45,10 +45,9 @@ class App extends Component {
                 logout={ this.logout } /> :
               <Redirect to="/" />
               } />
-            <Route path="/newGame" render={ () => this.state.user ?
-              <NewGame /> :
-              <Redirect to="/" />
-              } />
+            { this.state.user && 
+              <Route exact path="/newGame/:id" component={NewGame} />
+            }
             <Route path="/friends" render={ () => this.state.user ?
               <Friends /> :
               <Redirect to="/" />

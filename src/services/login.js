@@ -10,4 +10,16 @@ const logout = () => {
   window.localStorage.removeItem('vainoUser')
 }
 
-export default { login, logout }
+const getConfig = () => {
+  const token = JSON.parse(window.localStorage.getItem('vainoUser'))
+  
+  let config = {
+    headers: {}
+  }
+
+  if (token) config.headers.authorization = `bearer ${token.token}`
+
+  return config
+}
+
+export default { login, logout, getConfig }

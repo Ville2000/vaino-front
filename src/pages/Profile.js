@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './Profile.css'
 import history from '../services/history'
+import gameService from '../services/game'
 
 class Profile extends Component {
   constructor(props) {
@@ -9,6 +10,11 @@ class Profile extends Component {
     this.state = {
       games: []
     }
+  }
+
+  createGame = async () => {
+    const game = await gameService.createGame()
+    history.push(`/newGame/${game._id}`)
   }
 
   render() {
@@ -27,7 +33,7 @@ class Profile extends Component {
           </div>
           <div className="profile__content__buttons">
             <button onClick={() => history.push('/friends')}className="btn btn--red">Kaverit</button>
-            <button onClick={() => history.push('/newGame')}className="btn btn--blue">Uusi peli</button>
+            <button onClick={ this.createGame } className="btn btn--blue">Uusi peli</button>
           </div>
         </div>
       </div>

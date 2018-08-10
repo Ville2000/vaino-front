@@ -36,7 +36,7 @@ class Home extends Component {
         username: this.state.username,
         password: this.state.password,
       })
-  
+
       window.localStorage.setItem('vainoUser', JSON.stringify(user))
       this.setState({ username: '', password: '', user })
       this.props.setUser(user)

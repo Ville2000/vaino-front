@@ -30,7 +30,8 @@
   width: 100%;
 }
 
-i {
+.about__content__left > i,
+.about__content__right > i {
   border: solid white;
   border-width: 0 6px 6px 0;
   display: inline-block;

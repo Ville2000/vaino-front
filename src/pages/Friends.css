@@ -1,0 +1,42 @@
+.friends__wrapper {
+  display: grid;
+  grid-template-rows: max-content 1fr;
+  padding-top: 8px;
+  height: 100%;
+  position: relative;
+}
+
+.friends__content {
+  display: grid;
+  grid-template-rows: max-content 1fr max-content;
+  margin-top: 16px;
+}
+
+.friends__content__header {
+  margin: 0;
+  margin-bottom: 8px;
+}
+
+.friends__wrapper__notification,
+.friends__wrapper__success {
+  position: absolute;
+  top: 50px;
+  width: 100%;
+  border-radius: 4px;
+  padding: 10px 0;
+  display: grid;
+  justify-items: center;
+}
+
+.friends__wrapper__notification {
+  background-color: crimson;
+}
+
+.friends__wrapper__success {
+  background-color: var(--green);
+}
+
+.friends__wrapper__notification > p,
+.friends__wrapper__success > p {
+  margin: 0;
+}

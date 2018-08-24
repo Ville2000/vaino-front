@@ -22,4 +22,15 @@ const getConfig = () => {
   return config
 }
 
-export default { login, logout, getConfig }
+const getLoggedInUserUsername = () => {
+  const token = JSON.parse(window.localStorage.getItem('vainoUser'))
+
+  return token ? token.username : ''
+}
+
+export default {
+  login,
+  logout,
+  getConfig,
+  getLoggedInUserUsername
+}

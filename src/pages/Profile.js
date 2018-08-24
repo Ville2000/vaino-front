@@ -8,7 +8,8 @@ class Profile extends Component {
     super(props)
 
     this.state = {
-      games: []
+      games: [],
+      username: props.user.username
     }
   }
 
@@ -22,6 +23,7 @@ class Profile extends Component {
       <div className="profile">
         <div className="profile__header">
           <h1>VÄINÖ</h1>
+          <div className="profile__header__username">{ this.state.username }</div>
           <button className="btn btn--danger"onClick={this.props.logout}>Kirjaudu ulos</button>
         </div>
         <div className="profile__content">

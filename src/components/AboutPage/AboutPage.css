@@ -1,0 +1,9 @@
+.about-page__content {
+  display: grid;
+  grid-template-rows: max-content 1fr;
+  justify-content: center;
+}
+
+.about-page__content > * {
+  justify-self: center;
+}

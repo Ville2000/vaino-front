@@ -12,22 +12,27 @@ class Friends extends Component {
 
     this.state = {
       username: '',
-      friends: []
+      friends: [],
+      notification: null,
+      success: null,
+      loadingFriends: true
     }
   }
 
   componentDidMount = async () => {
     const friends = await friendService.listFriends();
 
-    console.log('friends', friends)
-
     this.setState({
       friends
+    })
+
+    this.setState({
+      loadingFriends: false
     })
   }
 
   addFriend = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     try {
       const friends = await friendService.addFriend(this.state.username)
@@ -36,8 +41,14 @@ class Friends extends Component {
         friends,
         username: ''
       })
+
+      this.displaySuccess('Kaveri lisätty listaan')
     } catch(e) {
-      console.log('Virhe lisätessä kaveria')
+      this.setState({
+        username: ''
+      })
+      
+      this.displayNotification(e.response.data.error)
     }
   }
 
@@ -46,18 +57,33 @@ class Friends extends Component {
       try {
         const friends = await friendService.removeFriend(id)
 
-        console.log('friends after delete', friends)
-
         this.setState({
           friends
         })
+        this.displaySuccess('Kaveri poistettu listalta')
       } catch(e) {
-        console.log('Virhe poistaessa kaveria')
+        this.displayNotification(e.response.data.error)
       }
     }
   }
 
   handleUsernameChange = (e) => this.setState({ username: e.target.value })
+
+  displayNotification = (notification) => {
+    this.setState({ notification })
+
+    setTimeout(() => {
+      this.setState({ notification: null })
+    }, 3000)
+  }
+
+  displaySuccess = (success) => {
+    this.setState({ success })
+
+    setTimeout(() => {
+      this.setState({ success: null })
+    }, 3000)
+  }
 
   render() {
     return(
@@ -65,18 +91,26 @@ class Friends extends Component {
         <Link style={ backBtn } to="/profile">Takaisin</Link>
         <div className="friends__content">
           <h1 className="friends__content__header">Kaverit</h1>
-          { (this.state.friends && this.state.friends.length > 0) ?
-            <FriendList
-              friends={this.state.friends}
-              deleteFriend={ this.deleteFriend } /> :
-            <div>Ei kavereita kaverilistalla</div>
-          }
+          <FriendList
+            friends={ this.state.friends }
+            deleteFriend={ this.deleteFriend }
+            loading={this.state.loadingFriends } />
           <FriendForm
             username={this.state.username}
-            handleUsernameChange={this.handleUsernameChange}
+            handleUsernameChange={ this.handleUsernameChange }
             addFriend={this.addFriend}
           />
         </div>
+        { this.state.notification ? 
+          <div className="friends__wrapper__notification">
+            <p>{ this.state.notification }</p>
+          </div> : null
+        }
+        { this.state.success ? 
+          <div className="friends__wrapper__success">
+            <p>{ this.state.success }</p>
+          </div> : null
+        }
       </div>
     )
   }

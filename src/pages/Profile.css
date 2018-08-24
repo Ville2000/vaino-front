@@ -6,8 +6,10 @@
 }
 
 .profile__header {
+  width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr repeat(2, max-content);
+  grid-gap: 8px;
 }
 
 .profile__header > h1 {
@@ -15,6 +17,11 @@
   font-size: 22px;
   justify-self: start;
   align-self: center;
+}
+
+.profile__header__username {
+  align-self: center;
+  justify-self: end;
 }
 
 .profile__header > button {

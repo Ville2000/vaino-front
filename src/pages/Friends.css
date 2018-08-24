@@ -1,0 +1,17 @@
+.friends__wrapper {
+  display: grid;
+  grid-template-rows: max-content 1fr;
+  padding-top: 8px;
+  height: 100%;
+}
+
+.friends__content {
+  display: grid;
+  grid-template-rows: max-content 1fr max-content;
+  margin-top: 16px;
+}
+
+.friends__content__header {
+  margin: 0;
+  margin-bottom: 8px;
+}

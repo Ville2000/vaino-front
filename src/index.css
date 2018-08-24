@@ -3,6 +3,7 @@
   --blue: #0F4083;
   --green: rgba(0, 117, 59, 1);
   --orange: rgba(253, 97, 0, 1);
+  --shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
 }
 
 #root {

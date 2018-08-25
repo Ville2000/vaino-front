@@ -28,13 +28,14 @@ const pollGameInvitations = async () => {
 
 const acceptInvitation = async (id) => {
   const config = loginService.getConfig()
-  const { data } = await axios.put(`${baseUrl}/${id}/accept` , config)
+  const { data } = await axios.put(`${baseUrl}/${id}/accept`, {}, config)
+  console.log('Got data', data)
   return data
 }
 
 const denyInvitation = async (id) => {
   const config = loginService.getConfig()
-  const { data } = await axios.delete(`${baseUrl}/${id}/deny`, config)
+  const { data } = await axios.put(`${baseUrl}/${id}/deny`, {}, config)
   return data
 }
 

@@ -11,10 +11,9 @@ class Profile extends Component {
     this.state = {
       games: [],
       username: props.user.username,
-      pollInvitations: true,
       invitationInterval: null,
       pendingInvitations: [],
-      displayInvitations: true
+      displayInvitations: false
     }
   }
 
@@ -35,13 +34,11 @@ class Profile extends Component {
   initInterval = () => {
     const invitationInterval = setInterval(async () => {
 
-      if (this.state.pollInvitations) {
-        const pendingInvitations = await gameService.pollGameInvitations()
+      const pendingInvitations = await gameService.pollGameInvitations()
 
-        this.setState({
-          pendingInvitations
-        })
-      }
+      this.setState({
+        pendingInvitations
+      })
     }, 5000)
 
     this.setState({
@@ -50,11 +47,10 @@ class Profile extends Component {
   }
 
   removeInterval = () => {
-    clearInterval(this.state.invitationInterval)
+    const invitationInterval = clearInterval(this.state.invitationInterval)
 
     this.setState({
-      invitationInterval: null,
-      pollInvitations: false
+      invitationInterval
     })
   }
 
@@ -69,13 +65,18 @@ class Profile extends Component {
 
   acceptInvitation = (id) => {
     return async () => {
-      console.log('Accept', id)
-
       try {
         this.removeInterval()
 
-        const data = await gameService.acceptInvitation(id);
-        console.log('Data', data)
+        await gameService.acceptInvitation(id);
+        
+        const games = this.state.pendingInvitations.filter(game => game._id != id)
+
+        this.setState({
+          pendingInvitations: games
+        })
+
+        // TODO: Inform user the game invitation has been accepted
 
         this.initInterval()
       } catch(e) {
@@ -86,13 +87,18 @@ class Profile extends Component {
 
   denyInvitation = (id) => {
     return async () => {
-      console.log('Deny', id)
-
       try {
         this.removeInterval()
 
-        const data = await gameService.denyInvitation(id);
-        console.log('Data', data)
+        await gameService.denyInvitation(id);
+
+        const games = this.state.pendingInvitations.filter(game => game._id != id)
+
+        this.setState({
+          pendingInvitations: games
+        })
+
+        // TODO: Inform user the game invitation has been denied
 
         this.initInterval()
       } catch(e) {

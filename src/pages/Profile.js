@@ -42,7 +42,7 @@ class Profile extends Component {
           pendingInvitations
         })
       }
-    }, 3000)
+    }, 5000)
 
     this.setState({
       invitationInterval

@@ -4,6 +4,7 @@
   --green: rgba(0, 117, 59, 1);
   --orange: rgba(253, 97, 0, 1);
   --shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+  --black: rgba(42, 42, 42, 1);
 }
 
 #root {

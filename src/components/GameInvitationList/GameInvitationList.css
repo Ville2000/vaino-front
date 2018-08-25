@@ -1,0 +1,54 @@
+.game_invitations_list__wrapper {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: var(--black);
+  z-index: 100;
+  width: 100%;
+  margin-top: 8px;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.game_invitations_list__header {
+  display: grid;
+  grid-template-columns: 1fr max-content;
+  padding: 4px 8px;
+  align-items: center;
+  font-size: 16px;
+}
+
+.game_invitations_list__header > h2 {
+  margin: 0;
+  padding: 8px;
+}
+
+.game_invitations_list__header > button {
+  border: none;
+  background-color: var(--red);
+  color: white;
+  text-shadow: var(--shadow);
+  padding: 4px 8px;
+}
+
+.game_invitations_list__invitation {
+  display: grid;
+  grid-template-columns: 1fr max-content max-content;
+  align-items: center;
+  grid-gap: 8px;
+  padding: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  margin: 8px;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.game_invitations_list__invitation__creator {
+  position: relative;
+}
+
+.game_invitations_list__invitation__creator > span {
+  position: absolute;
+  top: -100%;
+  font-size: 11px;
+  font-style: italic;
+}

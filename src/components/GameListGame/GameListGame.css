@@ -1,0 +1,52 @@
+.game-list-game,
+.game-list-game--active,
+.game-list-game--ended {
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr;
+  background-color: rgb(250, 250, 250);
+  margin: 6px 0;
+  padding: 10px 4px;
+  border-radius: 1px;
+  box-shadow: var(--shadow);
+  transition: background-color 0.2s ease-in-out;
+}
+
+.game-list-game:active {
+  background-color: lightgrey;
+}
+
+.game-list-game__players,
+.game-list-game__date {
+  display: grid;
+  justify-items: end;
+}
+
+.game-list-game__creator > p,
+.game-list-game__players > p,
+.game-list-game__date > p {
+  margin: 0;
+}
+
+.game-list-game__players > p,
+.game-list-game__date > p, {
+  justify-self: end;
+}
+
+/* The animation code */
+@keyframes example {
+  from {
+    background-color: white;
+  }
+  to {
+    background-color: rgb(152, 207, 152);
+  }
+}
+
+/* The element to apply the animation to */
+.game-list-game--active {
+  background-color: red;
+  animation-name: example;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
+}

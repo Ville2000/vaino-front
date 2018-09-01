@@ -29,7 +29,6 @@ const pollGameInvitations = async () => {
 const acceptInvitation = async (id) => {
   const config = loginService.getConfig()
   const { data } = await axios.put(`${baseUrl}/${id}/accept`, {}, config)
-  console.log('Got data', data)
   return data
 }
 
@@ -39,11 +38,25 @@ const denyInvitation = async (id) => {
   return data
 }
 
+const leaveGame = async (id) => {
+  const config = loginService.getConfig()
+  const { data } = await axios.put(`${baseUrl}/${id}/leave`, {}, config)
+  return data
+}
+
+const listGames = async () => {
+  const config = loginService.getConfig()
+  const { data } = await axios.get(`${baseUrl}`, config)
+  return data
+}
+
 export default {
   addPlayerToGame,
   createGame,
   getGameById,
   pollGameInvitations,
   acceptInvitation,
-  denyInvitation
+  denyInvitation,
+  leaveGame,
+  listGames
 }

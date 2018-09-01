@@ -1,0 +1,29 @@
+.game-list {
+  color: black;
+  background-color: white;
+  background-size: 25px 25px;
+  background-image: linear-gradient(to right, lightgrey 1px, transparent 1px), linear-gradient(to bottom, lightgrey 1px, transparent 1px);
+  background-position-x: -8px;
+  background-position-y: -8px;
+  border-radius: 2em 1em 4em / 0.5em 3em;
+  margin: 0;
+  padding: 16px 8px;
+}
+
+.game-list__header {
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr;
+  margin-bottom: 4px;
+  border-bottom: 1px solid var(--black);
+}
+
+.game-list__header__creator {
+  margin-left: 4px;
+}
+
+.game-list__header__players,
+.game-list__header__date {
+  display: grid;
+  justify-content: end;
+  margin-right: 4px;
+}

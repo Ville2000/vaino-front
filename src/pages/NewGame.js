@@ -1,30 +1,43 @@
-  import React, {Component} from 'react'
-import { Link } from 'react-router-dom'
-import { backBtn } from './../misc/inlineStyles'
+import React, {Component} from 'react'
 import gameService from './../services/game'
 import playerService from './../services/player'
 import PlayerSearchForm from './../components/PlayerSearchForm/PlayerSearchForm'
 import PlayerList from '../components/PlayerList/PlayerList';
+import history from '../services/history'
+import './NewGame.css'
+import PageHeader from '../components/PageHeader/PageHeader';
+import loginService from './../services/login'
 
 class NewGame extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
+      gameId: props.match.params.id, 
       game: {
-        _id: props.match.params.id
+        createdBy: {},
+        players: []
       },
-      playerSearch: ''
+      createdBy: {},
+      players: [],
+      playerToAdd: '',
+      isGameCreator: false
     }
-
-    console.log('id', props.match.params.id);
   }
 
   componentDidMount = async () => {
-    console.log('Mounted')
     try {
-      const game = await gameService.getGameById(this.state.game._id)
-      this.setState({ game })
+      const game = await gameService.getGameById(this.state.gameId)
+
+      console.log('gameId', this.state.gameId)
+
+      const isGameCreator = loginService.getLoggedInUserUsername() === game.createdBy.username ? true : false
+      
+      this.setState({
+        isGameCreator
+      })
+
+      this.setGameToState(game)
     } catch(err) {
       // TODO: Nappaa virhe
     }
@@ -32,33 +45,78 @@ class NewGame extends Component {
 
   addPlayer = async (e) => {
     e.preventDefault();
-    const data = await gameService.addPlayerToGame(this.state.game._id, { username: this.state.playerSearch })
+
+    try {
+      const game = await gameService.addPlayerToGame(this.state.game._id, { username: this.state.playerToAdd })
+      
+      this.setGameToState(game)
+    } catch(e) {
+      // TODO: Ilmoita virheestä, että pelaajaa ei löytynyt. Tee yleinen ilmoituskomponentti?
+      console.log('addPlayer', e)
+    }
   }
 
   handleFormInputChange = (e) => {
     const input = e.target.value
-    this.setState({ playerSearch: input })
+    this.setState({ playerToAdd: input })
   }
 
-  handlePlayerSearch = async (e) => {
-    e.preventDefault();
-    const player = await playerService.searchPlayer(this.state.playerSearch)
+  setGameToState = (game) => {
+    this.setState({
+      game,
+      players: game.players,
+      createdBy: game.createdBy,
+      playerToAdd: ''
+    })
+  }
+
+  removePlayer = (id) => {
+    return () => {
+      console.log('Remove player', id)
+    }
+  }
+
+  leaveGame = async () => {
+    console.log('Leaving game')
+    // try {
+    //   await gameService.leaveGame(this.state.gameId)
+      
+    //   history.push('/profile')
+    // } catch(e) {
+    //   console.log('leave game', e)
+    // }
   }
 
   render() {
     return (
-      <div>
-        <header>
-          <Link style={backBtn} to="/">Takaisin</Link>
-          <h1>Uusi peli</h1>
-        </header>
-        <main>
-          <PlayerList />
-          <PlayerSearchForm
-            handleFormSubmit={this.handlePlayerSearch}
-            handleFormInputChange={this.handleFormInputChange}
-            formInput={this.state.playerSearch} />
-          <button className='btn btn--blue'>Aloita peli</button>
+      <div className="new-game">
+        <PageHeader
+          title="Uusi peli"
+          link={ {
+            title: "Poistu",
+            click: this.leaveGame
+          } }
+        />
+        <main className="new-game__content">
+          <div className="new-game__content__player-list-wrapper">
+            <PlayerList
+              players={ this.state.players }
+              createdBy={ this.state.createdBy }
+              removePlayer={ this.removePlayer }
+              isGameCreator={ this.state.isGameCreator }
+            />
+          </div>
+          {
+            this.state.isGameCreator ?
+            <div>
+              <PlayerSearchForm
+                handleFormSubmit={this.addPlayer}
+                handleFormInputChange={this.handleFormInputChange}
+                formInput={this.state.playerToAdd} />
+              <button className="new-game__content__btn btn btn--blue">Aloita peli</button>
+            </div> :
+            <div></div>
+          }
         </main>
       </div>
     )

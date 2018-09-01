@@ -3,6 +3,7 @@ import './Profile.css'
 import history from '../services/history'
 import gameService from '../services/game'
 import GameInvitationList from '../components/GameInvitationList/GameInvitationList';
+import GameList from '../components/GameList/GameList';
 
 class Profile extends Component {
   constructor(props) {
@@ -18,10 +19,10 @@ class Profile extends Component {
   }
 
   componentDidMount = async () => {
-    const pendingInvitations = await gameService.pollGameInvitations()
+    const games = await gameService.listGames()
 
     this.setState({
-      pendingInvitations
+      games
     })
 
     this.initInterval()
@@ -33,7 +34,6 @@ class Profile extends Component {
 
   initInterval = () => {
     const invitationInterval = setInterval(async () => {
-
       const pendingInvitations = await gameService.pollGameInvitations()
 
       this.setState({
@@ -47,10 +47,10 @@ class Profile extends Component {
   }
 
   removeInterval = () => {
-    const invitationInterval = clearInterval(this.state.invitationInterval)
+    clearInterval(this.state.invitationInterval)
 
     this.setState({
-      invitationInterval
+      invitationInterval: null
     })
   }
 
@@ -69,16 +69,8 @@ class Profile extends Component {
         this.removeInterval()
 
         await gameService.acceptInvitation(id);
-        
-        const games = this.state.pendingInvitations.filter(game => game._id != id)
 
-        this.setState({
-          pendingInvitations: games
-        })
-
-        // TODO: Inform user the game invitation has been accepted
-
-        this.initInterval()
+        history.push(`/newGame/${id}`)
       } catch(e) {
         this.initInterval()
       }
@@ -115,6 +107,18 @@ class Profile extends Component {
     })
   }
 
+  selectGame = (id) => {
+    return async () => {
+      const game = await gameService.getGameById(id)
+
+      if (game.started) {
+        history.push(`/game`)
+      } else {
+        history.push(`/newGame/${game._id}`)
+      }
+    }
+  }
+
   render() {
     return (
       <div className="profile">
@@ -131,12 +135,10 @@ class Profile extends Component {
           <button className="btn btn--danger"onClick={this.props.logout}>Kirjaudu ulos</button>
         </div>
         <div className="profile__content">
-          <div className="profile__content__previous-games">
-            <h1>Viimeiset pelisi</h1>
-            { (this.state.games.length < 1) ?
-              <p><i>Ei viimeisiä pelejä</i></p> :
-              <div>Tee hyvä miäs tästä komponentti</div>}
-          </div>
+          <GameList
+            games={ this.state.games }
+            selectGame={ this.selectGame }
+          />
           <div className="profile__content__buttons">
             <button onClick={ this.navigateToFriends }className="btn btn--red">Kaverit</button>
             <button onClick={ this.createGame } className="btn btn--blue">Uusi peli</button>

@@ -1,0 +1,21 @@
+.new-game {
+  height: 100%;
+  display: grid;
+  grid-template-rows: max-content 1fr;
+}
+
+.new-game__content {
+  display: grid;
+  grid-template-rows: 1fr max-content;
+  height: 100%;
+}
+
+.new-game__content__player-list-wrapper {
+  height: 100%;
+  overflow: scroll;
+}
+
+.new-game__content__btn {
+  margin: 16px 0 8px 0;
+  width: 100%;
+}

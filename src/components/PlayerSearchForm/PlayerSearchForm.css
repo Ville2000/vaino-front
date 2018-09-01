@@ -1,0 +1,17 @@
+.player-search-form {
+  display: grid;
+  grid-template-columns: 1fr max-content;
+  grid-gap: 8px;
+}
+
+.player-search-form > label {
+  display: grid;
+  grid-template-rows: max-content max-content;
+  font-size: 14px;
+  grid-gap: 4px;
+}
+
+.player-search-form > label > input {
+  padding: 4px;
+  font-size: 16px;
+}

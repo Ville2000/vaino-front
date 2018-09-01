@@ -10,15 +10,19 @@ const GameList = ({ games, selectGame }) => {
         <small className="game-list__header__date"><i>Pvm</i></small>
         <small className="game-list__header__players"><i>Pelaajat</i></small>
       </div>
-      {
-        games.map(game => 
-          <GameListGame
-            key={ game._id }
-            game={ game }
-            selectGame={ selectGame }
-          />
-        )
-      }
+      <div className="game-list__games">
+        <div className="game-list__games__wrapper">
+        {
+          games.map(game => 
+            <GameListGame
+              key={ game._id }
+              game={ game }
+              selectGame={ selectGame }
+            />
+          )
+        }
+        </div>
+      </div>
     </div>
   )
 }

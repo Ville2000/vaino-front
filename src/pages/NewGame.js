@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import gameService from './../services/game'
-import playerService from './../services/player'
 import PlayerSearchForm from './../components/PlayerSearchForm/PlayerSearchForm'
 import PlayerList from '../components/PlayerList/PlayerList';
 import history from '../services/history'
@@ -21,7 +20,8 @@ class NewGame extends Component {
       createdBy: {},
       players: [],
       playerToAdd: '',
-      isGameCreator: false
+      isGameCreator: false,
+      gameStartedInterval: null
     }
   }
 
@@ -37,11 +37,31 @@ class NewGame extends Component {
 
       this.setGameToState(game)
 
-      // TODO: Start interval
-      // TODO: Päivitä data. Tarkista onko started. Jos started niin push Game-sivulle!
+      this.initInterval()
     } catch(err) {
       // TODO: Nappaa virhe
     }
+  }
+
+  componentWillUnmount = () => {
+    clearInterval(this.state.gameStartedInterval)
+
+    this.setState({
+      gameStartedInterval: null
+    })
+  }
+
+  initInterval = () => {
+    const gameStartedInterval = setInterval(async () => {
+      const game = await gameService.getGameById(this.state.gameId)
+
+      if (game && game.started)
+        history.push(`/game/${game._id}`)
+    }, 5000)
+
+    this.setState({
+      gameStartedInterval
+    })
   }
 
   addPlayer = async (e) => {
@@ -78,18 +98,20 @@ class NewGame extends Component {
   }
 
   leaveGame = async () => {
-    console.log('Leaving game')
-    // try {
-    //   await gameService.leaveGame(this.state.gameId)
+    try {
+      await gameService.leaveGame(this.state.gameId)
       
-    //   history.push('/profile')
-    // } catch(e) {
-    //   console.log('leave game', e)
-    // }
+      history.push('/profile')
+    } catch(e) {
+      console.log('leave game', e)
+    }
   }
 
-  componentWillUnmount = () => {
-    // TODO: Clear interval
+  startGame = async () => {
+    const status = await gameService.startGame(this.state.gameId)
+
+    if (status === 'OK')
+      history.push(`/game/${this.state.gameId}`)
   }
 
   render() {
@@ -118,7 +140,9 @@ class NewGame extends Component {
                 handleFormSubmit={this.addPlayer}
                 handleFormInputChange={this.handleFormInputChange}
                 formInput={this.state.playerToAdd} />
-              <button className="new-game__content__btn btn btn--blue">Aloita peli</button>
+              <button
+                onClick={ this.startGame }
+                className="new-game__content__btn btn btn--blue">Aloita peli</button>
             </div> :
             <div></div>
           }

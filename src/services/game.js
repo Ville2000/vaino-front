@@ -56,6 +56,12 @@ const addPoints = async (gameId, round, points) => {
   return data
 }
 
+const startGame = async (gameId) => {
+  const config = loginService.getConfig()
+  const { data } = await axios.get(`${baseUrl}/${gameId}/start`, config)
+  return data
+}
+
 export default {
   addPlayerToGame,
   createGame,
@@ -65,5 +71,6 @@ export default {
   denyInvitation,
   leaveGame,
   listGames,
-  addPoints
+  addPoints,
+  startGame
 }

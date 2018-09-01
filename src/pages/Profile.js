@@ -112,7 +112,7 @@ class Profile extends Component {
       const game = await gameService.getGameById(id)
 
       if (game.started) {
-        history.push(`/game`)
+        history.push(`/game/${game._id}`)
       } else {
         history.push(`/newGame/${game._id}`)
       }

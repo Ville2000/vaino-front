@@ -1,0 +1,21 @@
+.points {
+  display: grid;
+  grid-template-rows: max-content 1fr;
+  height: calc(100% - 8px);
+}
+
+.points__table {
+  margin-top: 16px;
+}
+
+.points__table__header {
+  grid-column: 1;
+  font-size: 14px;
+}
+
+.points__table__header:first-child {
+  font-weight: bold;
+}
+.points__add-points-btn {
+  align-self: end;
+}

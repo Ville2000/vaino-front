@@ -31,6 +31,7 @@ body {
   color: white;
   border: none;
   font-weight: bold;
+  box-shadow: var(--shadow);
 }
 
 .btn--success {

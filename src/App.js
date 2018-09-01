@@ -54,7 +54,7 @@ class App extends Component {
               <Redirect to="/" />
               } />
             <Route path="/about" render={ () => <About /> } />
-            <Route path="/game" component={ Game } />
+            <Route path="/game/:id" component={ Game } />
             <Route render={ () => <NotFound /> } />
           </Switch>
         </Router>

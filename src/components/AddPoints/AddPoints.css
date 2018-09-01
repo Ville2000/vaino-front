@@ -1,0 +1,73 @@
+.add-points {
+  display: grid;
+  grid-template-columns: 1fr 5fr 1fr;
+  height: calc(100% - 8px);
+}
+
+.add-points__content {
+  display: grid;
+  grid-template-rows: 3fr repeat(2, max-content);
+}
+
+.add-points__content__description {
+  height: 100%;
+}
+
+.add-points__content__description > h1,
+.add-points__content__description > p {
+  text-align: center;
+}
+
+.add-points__content__description > h1 {
+  margin: 16px 0 24px 0;
+}
+
+.add-points__content__description > p {
+  margin: 0 0 8px 0;
+}
+
+.add-points__content__form {
+  display: grid;
+  grid-template-rows: repeat(3, max-content);
+  margin-bottom: 12px;
+  grid-gap: 4px;
+}
+
+.add-points__content__form > label {
+  justify-self: center;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.add-points__content__form > input {
+  height: 50px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+}
+
+.add-points__left,
+.add-points__right {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.add-points__left > i,
+.add-points__right > i {
+  border: solid white;
+  border-width: 0 6px 6px 0;
+  display: inline-block;
+  padding: 6px;
+}
+
+.right {
+  transform: rotate(-45deg);
+}
+
+.left {
+  transform: rotate(135deg);
+}

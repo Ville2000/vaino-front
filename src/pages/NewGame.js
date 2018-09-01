@@ -29,8 +29,6 @@ class NewGame extends Component {
     try {
       const game = await gameService.getGameById(this.state.gameId)
 
-      console.log('gameId', this.state.gameId)
-
       const isGameCreator = loginService.getLoggedInUserUsername() === game.createdBy.username ? true : false
       
       this.setState({
@@ -38,6 +36,9 @@ class NewGame extends Component {
       })
 
       this.setGameToState(game)
+
+      // TODO: Start interval
+      // TODO: Päivitä data. Tarkista onko started. Jos started niin push Game-sivulle!
     } catch(err) {
       // TODO: Nappaa virhe
     }
@@ -85,6 +86,10 @@ class NewGame extends Component {
     // } catch(e) {
     //   console.log('leave game', e)
     // }
+  }
+
+  componentWillUnmount = () => {
+    // TODO: Clear interval
   }
 
   render() {
